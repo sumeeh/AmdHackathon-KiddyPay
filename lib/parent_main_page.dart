@@ -424,7 +424,6 @@ class _ParentMainPageState extends State<ParentMainPage> {
 
             SizedBox(height: 30),
 
-            // Transaction Details - Use Expanded instead of SingleChildScrollView
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),

@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       duration: Duration(seconds: 2),
       vsync: this,
     );
-    
+
     // Start the popup sequence
     _startPopupSequence();
   }
@@ -30,15 +30,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     // Start fireworks animation
     _fireworksController.repeat();
 
-
-        // Hide welcome popup after 5 seconds
-        Timer(Duration(seconds: 5), () {
-          if (mounted) {
-            setState(() {
-              showWelcomePopup = false;
-            });
-          }
+    // Hide welcome popup after 5 seconds
+    Timer(Duration(seconds: 5), () {
+      if (mounted) {
+        setState(() {
+          showWelcomePopup = false;
         });
+      }
+    });
   }
 
   @override
@@ -171,40 +170,42 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                SizedBox(height: 40),
 
                 // Progress bar with star
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 40),
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      Container(
-                        height: 10,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF9BB5A6),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      Positioned(
-                        right: 135,
-                        top: -12,
-                        child: Icon(
-                          Icons.star,
-                          color: Color(0xFFE6B800),
-                          size: 25,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+               // Progress bar with star
+Container(
+  margin: EdgeInsets.symmetric(horizontal: 40),
+  child: Stack(
+    clipBehavior: Clip.none, // This allows the star to be visible outside the container bounds
+    children: [
+      Container(
+        height: 10,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      Container(
+        height: 10,
+        width: 150,
+        decoration: BoxDecoration(
+          color: Color(0xFF9BB5A6),
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      Positioned(
+        right: 133,
+        top: -21,
+        child: Icon(
+          Icons.star,
+          color: Color(0xFFE6B800),
+          size: 50,
+        ),
+      ),
+    ],
+  ),
+),
 
                 Spacer(),
 
@@ -319,7 +320,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 ),
               ],
             ),
-          ),          
+          ),
 
           // Welcome Popup
           if (showWelcomePopup)
