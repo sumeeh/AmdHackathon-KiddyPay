@@ -1,16 +1,83 @@
-# kiddypay_app
+#  KiddyPay - تربية مالية ذكية للأطفال
 
-A new Flutter project.
+**KiddyPay** هو تطبيق تعليمي مالي موجه للأطفال، يساعدهم على تعلّم مفاهيم التوفير، الادخار، والإنفاق المسؤول، من خلال تجربة آمنة، ممتعة، ومراقبة من قبل أولياء الأمور.  
+تم تطويره باستخدام Flutter كمشروع أولي ضمن **Amd Hackathon**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+##  خطوات تشغيل التطبيق
 
-A few resources to get you started if this is your first Flutter project:
+### 1.  المتطلبات الأساسية
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+تأكد من توفر التالي على جهازك:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter (آخر إصدار)  
+  [طريقة التثبيت الرسمية](https://docs.flutter.dev/get-started/install)
+- محرر مثل Android Studio أو VS Code
+- جهاز فعلي أو محاكي Emulator
+- اتصال إنترنت لتحميل الحزم
+
+للتحقق من إعداد بيئتك:
+
+```bash
+flutter doctor
+```
+
+---
+
+### 2.  تحميل المشروع
+
+```bash
+git clone https://github.com/sumeeh/AmdHackathon-KiddyPay.git
+cd AmdHackathon-KiddyPay
+```
+
+---
+
+### 3.  تثبيت الحزم
+
+```bash
+flutter pub get
+```
+
+---
+
+### 4.  تشغيل التطبيق
+
+تأكد من أن المحاكي شغال أو أن الجهاز متصل، ثم شغّل التطبيق:
+
+```bash
+flutter run
+```
+
+---
+
+##  التقنية المستخدمة
+
+- **Flutter** لبناء واجهات التطبيق (Android و iOS)
+- **Firebase** لإدارة المستخدمين والبيانات
+- **Python (خارجي)** لتحليل السلوك المالي غير المعتاد (Anomaly Detection)
+- **Stripe API** (محاكاة فقط - لا يوجد ربط فعلي حتى الآن)
+
+---
+
+##  هيكل المشروع
+
+```bash
+lib/
+├── main.dart              # نقطة تشغيل التطبيق
+├── screens/               # الشاشات الرئيسية
+├── widgets/               # عناصر الواجهة القابلة لإعادة الاستخدام
+├── services/              # خدمات البيانات والمعالجة
+```
+
+---
+
+##  ملاحظات
+
+- هذا المشروع نموذج أولي للعرض والتجربة فقط
+- لا يتم إجراء أي عمليات مالية حقيقية
+- نظام الذكاء الاصطناعي مدمج بشكل أولي وقابل للتوسعة لاحقاً
+
+---
+
