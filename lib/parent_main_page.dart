@@ -234,7 +234,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
         ),
         child: Column(
           children: [
-            // Header with name and level
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -306,32 +306,92 @@ class _ParentMainPageState extends State<ParentMainPage> {
 
             SizedBox(height: 20),
 
-            // Stats Row
+            // Stats Row with Action Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start, 
               children: [
-                _buildStatItem(points.toString(), 'النقاط', isSecurityAlert),
-                _buildStatItem(spent.toString(), 'المُنفق', isSecurityAlert),
-                _buildStatItem(saved.toString(), 'الرصيد', isSecurityAlert),
+                // Points column
+                Column(
+                  children: [
+                    _buildStatItem(
+                      points.toString(),
+                      'النقاط',
+                      isSecurityAlert,
+                    ),
+                    SizedBox(
+                      height: name == 'راكان' ? 40 : 0,
+                    ), 
+                  ],
+                ),
+                // Spent column
+                Column(
+                  children: [
+                    _buildStatItem(
+                      spent.toString(),
+                      'المُنفق',
+                      isSecurityAlert,
+                    ),
+                    SizedBox(
+                      height: name == 'راكان' ? 40 : 0,
+                    ), 
+                  ],
+                ),
+            
+                Column(
+                  children: [
+                    _buildStatItem(saved.toString(), 'الرصيد', isSecurityAlert),
+                    if (name == 'راكان')
+                      Column(
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: isSecurityAlert
+                                  ? Colors.white
+                                  : Color(0xFF8A7CFF),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              isSecurityAlert ? Icons.warning : Icons.add,
+                              color: isSecurityAlert
+                                  ? Color(0xFFD32F2F)
+                                  : Colors.white,
+                              size: 18,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      SizedBox(
+                        height: 40,
+                      ), 
+                  ],
+                ),
               ],
             ),
 
-            SizedBox(height: 15),
-
-            // Action Button
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: isSecurityAlert ? Colors.white : Color(0xFF8A7CFF),
-                shape: BoxShape.circle,
+            if (name != 'راكان')
+              Column(
+                children: [
+                  SizedBox(height: 15),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: isSecurityAlert ? Colors.white : Color(0xFF8A7CFF),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isSecurityAlert ? Icons.warning : Icons.add,
+                      color: isSecurityAlert ? Color(0xFFD32F2F) : Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ],
               ),
-              child: Icon(
-                isSecurityAlert ? Icons.warning : Icons.add,
-                color: isSecurityAlert ? Color(0xFFD32F2F) : Colors.white,
-                size: 24,
-              ),
-            ),
           ],
         ),
       ),
@@ -383,149 +443,158 @@ class _ParentMainPageState extends State<ParentMainPage> {
   }
 
   void _showSecurityAlert(BuildContext context, String kidName) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    isScrollControlled: true,
-    builder: (BuildContext context) {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.85,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.85,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            // Handle bar
-            Container(
-              width: 40,
-              height: 4,
-              margin: EdgeInsets.only(top: 15),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2),
+          child: Column(
+            children: [
+              // Handle bar
+              Container(
+                width: 40,
+                height: 4,
+                margin: EdgeInsets.only(top: 15),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
 
-            SizedBox(height: 20),
+              SizedBox(height: 20),
 
-            // Header
-            Text(
-              'تفاصيل العملية',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+              // Header
+              Text(
+                'تفاصيل العملية',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
-            ),
 
-            SizedBox(height: 30),
+              SizedBox(height: 30),
 
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      _buildDetailItem('المبلغ:', '500 ريال سعودي'),
-                      SizedBox(height: 20),
-                      _buildDetailItem(
-                        'الوقت:',
-                        '3:12 صباحاً - الثلاثاء 31 يوليو 2025',
-                      ),
-                      SizedBox(height: 20),
-                      _buildDetailItem(
-                        'الموقع الجغرافي:',
-                        'جدة\n(السلوك المعتاد: الرياض)',
-                      ),
-                      SizedBox(height: 20),
-                      _buildDetailItem('نوع العملية:', 'شراء إلكتروني'),
-                      SizedBox(height: 20),
-                      _buildDetailItem(
-                        'اسم المتجر:',
-                        'buy-example.xyz (غير معروف)',
-                      ),
-                      SizedBox(height: 30),
-
-                      // Warning options
-                      Center(
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                                margin: EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF9BB5A6),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  'تأكيد ان العملية آمنة',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                                margin: EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[400],
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  'تجاهل التنبيه',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                                margin: EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFE57373),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  'تحديد العملية كمشبوهة',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _buildDetailItem('المبلغ:', '500 ريال سعودي'),
+                        SizedBox(height: 20),
+                        _buildDetailItem(
+                          'الوقت:',
+                          '3:12 صباحاً - الثلاثاء 31 يوليو 2025',
                         ),
-                      ),
-                      SizedBox(height: 30),
-                    ],
+                        SizedBox(height: 20),
+                        _buildDetailItem(
+                          'الموقع الجغرافي:',
+                          'جدة\n(السلوك المعتاد: الرياض)',
+                        ),
+                        SizedBox(height: 20),
+                        _buildDetailItem('نوع العملية:', 'شراء إلكتروني'),
+                        SizedBox(height: 20),
+                        _buildDetailItem(
+                          'اسم المتجر:',
+                          'buy-example.xyz (غير معروف)',
+                        ),
+                        SizedBox(height: 30),
+
+                        // Warning options
+                        Center(
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal: 30,
+                                  ),
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF9BB5A6),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    'تأكيد ان العملية آمنة',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal: 30,
+                                  ),
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[400],
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    'تجاهل التنبيه',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal: 30,
+                                  ),
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE57373),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    'تحديد العملية كمشبوهة',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   Widget _buildDetailItem(String label, String value) {
     return Column(
