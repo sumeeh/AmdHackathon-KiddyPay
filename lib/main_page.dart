@@ -21,11 +21,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       duration: Duration(seconds: 2),
       vsync: this,
     );
-    // _fireworksAnimation = Tween<double>(
-    //   begin: 0.0,
-    //   end: 1.0,
-    // ).animate(_fireworksController);
-
+    
     // Start the popup sequence
     _startPopupSequence();
   }
@@ -34,14 +30,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     // Start fireworks animation
     _fireworksController.repeat();
 
-    // Show personality popup for 10 seconds
-    Timer(Duration(seconds: 5), () {
-      if (mounted) {
-        setState(() {
-          showPersonalityPopup = false;
-          showWelcomePopup = true;
-        });
-        _fireworksController.stop();
 
         // Hide welcome popup after 5 seconds
         Timer(Duration(seconds: 5), () {
@@ -51,8 +39,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             });
           }
         });
-      }
-    });
   }
 
   @override

@@ -26,69 +26,21 @@ class CardsPage extends StatelessWidget {
         children: [
           // Main Card
           Container(
+            height: 300,
+            width: 700,
             margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(20),
-            height: 200,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF9BB5A6), Color(0xFF6B8E6B)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+            child: Center(
+              child: Image.asset(
+                'assets/card.png',
+                // fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.account_balance_wallet,
+                    size: 100,
+                    color: Color(0xFF9BB5A6),
+                  );
+                },
               ),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.contactless, color: Colors.white, size: 30),
-                    Text(
-                      'VISA',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Text(
-                  '3455 4562 7710 3507',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Expiry date',
-                          style: TextStyle(color: Colors.white70, fontSize: 12),
-                        ),
-                        Text(
-                          '02/30',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 40),
-                    Icon(Icons.sim_card, color: Colors.white70, size: 30),
-                  ],
-                ),
-              ],
             ),
           ),
 

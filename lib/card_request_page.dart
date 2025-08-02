@@ -25,21 +25,20 @@ class _CardRequestPageState extends State<CardRequestPage> {
         children: [
           // Card Stack Image Placeholder
           Container(
-            height: 200,
-            width: double.infinity,
+            height: 300,
+            width: 700,
             margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(15),
-            ),
             child: Center(
-              child: Text(
-                'Card Stack Image\nPlaceholder',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 16,
-                ),
+              child: Image.asset(
+                'assets/card.png',
+                // fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.account_balance_wallet,
+                    size: 100,
+                    color: Color(0xFF9BB5A6),
+                  );
+                },
               ),
             ),
           ),
@@ -62,18 +61,11 @@ class _CardRequestPageState extends State<CardRequestPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.location_on,
-                color: Colors.red,
-                size: 16,
-              ),
+              Icon(Icons.location_on, color: Colors.red, size: 16),
               SizedBox(width: 5),
               Text(
                 'حدد موقعك الآن',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
             ],
           ),
@@ -94,41 +86,33 @@ class _CardRequestPageState extends State<CardRequestPage> {
                 value: selectedCity.isEmpty ? null : selectedCity,
                 hint: Text(
                   'المدينة',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: Colors.grey[600], fontSize: 16),
                 ),
                 isExpanded: true,
-                items: [
-                  'الرياض',
-                  'جدة',
-                  'الدمام',
-                  'مكة المكرمة',
-                  'المدينة المنورة',
-                  'الطائف',
-                  'تبوك',
-                  'بريدة',
-                  'خميس مشيط',
-                  'حائل',
-                ].map((String city) {
-                  return DropdownMenuItem<String>(
-                    value: city,
-                    child: Text(
-                      city,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  );
-                }).toList(),
+                items:
+                    [
+                      'الرياض',
+                      'جدة',
+                      'الدمام',
+                      'مكة المكرمة',
+                      'المدينة المنورة',
+                      'الطائف',
+                      'تبوك',
+                      'بريدة',
+                      'خميس مشيط',
+                      'حائل',
+                    ].map((String city) {
+                      return DropdownMenuItem<String>(
+                        value: city,
+                        child: Text(city, style: TextStyle(fontSize: 16)),
+                      );
+                    }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
                     selectedCity = newValue!;
                   });
                 },
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.grey[600],
-                ),
+                icon: Icon(Icons.keyboard_arrow_down, color: Colors.grey[600]),
               ),
             ),
           ),
@@ -180,19 +164,12 @@ class _CardRequestPageState extends State<CardRequestPage> {
                       SizedBox(height: 5),
                       Text(
                         'ريال 30.00',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                       ),
                     ],
                   ),
                 ),
-                Icon(
-                  Icons.check_circle,
-                  color: Color(0xFF9BB5A6),
-                  size: 24,
-                ),
+                Icon(Icons.check_circle, color: Color(0xFF9BB5A6), size: 24),
               ],
             ),
           ),
